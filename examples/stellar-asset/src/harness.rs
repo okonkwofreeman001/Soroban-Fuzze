@@ -312,11 +312,7 @@ impl Harness for SacHarness {
     fn invariants(&self, env: &Env) -> Result<(), String> {
         let token = self.token.client(env);
         let admin = self.token.admin_client(env);
-        ensure_eq!(
-            admin.admin(),
-            self.actors.get(self.admin).clone(),
-            "admin"
-        );
+        ensure_eq!(admin.admin(), self.actors.get(self.admin).clone(), "admin");
         self.token
             .check_balances(env, &self.actors, &self.balances)?;
         for (a, from) in self.actors.iter() {
